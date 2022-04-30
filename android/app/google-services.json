@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "310024197693",
+    "firebase_url": "https://booksotore-3c766.firebaseio.com",
+    "project_id": "booksotore-3c766",
+    "storage_bucket": "booksotore-3c766.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310024197693:android:00ec623ffee40caea2bc54",
+        "android_client_info": {
+          "package_name": "com.example.twich_clone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "310024197693-o990qgpmejsdgtcjf13ortsu75re61q3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWD6RTQoQcpRpM5e_ETHBO98TaVJ7Oge4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "310024197693-o990qgpmejsdgtcjf13ortsu75re61q3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:310024197693:android:b6090dde19cc63dea2bc54",
+        "android_client_info": {
+          "package_name": "damon.com.tiktok"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "310024197693-o990qgpmejsdgtcjf13ortsu75re61q3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWD6RTQoQcpRpM5e_ETHBO98TaVJ7Oge4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "310024197693-o990qgpmejsdgtcjf13ortsu75re61q3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
