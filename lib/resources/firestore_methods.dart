@@ -14,7 +14,8 @@ class FirestoreMhetods {
   final _storageMethdos = StorageMethods();
 
   Future<String> starLiveStream(
-      BuildContext context, String title, Uint8List? image) async {
+      BuildContext context, String title, Uint8List? image,
+      {String type = "video"}) async {
     final user = Provider.of<UserProvider>(context, listen: false);
     String chaennelId = "";
     try {
@@ -37,10 +38,9 @@ class FirestoreMhetods {
             viewers: 0,
             channelId: chaennelId,
           );
-          await _firestore
-              .collection("livestream")
-              .doc(chaennelId)
-              .set(liveStream.toMap());
+          Map<String, dynamic> r = liveStream.toMap();
+          r["type"] = type;
+          await _firestore.collection("livestream").doc(chaennelId).set(r);
         } else {
           showSnackBar(context, "Two liveStream no working");
         }

@@ -4,6 +4,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:twich_clone/resources/firestore_methods.dart';
 import 'package:twich_clone/responsive/responsive.dart';
+import 'package:twich_clone/screens/broadcast_audio.dart';
 import 'package:twich_clone/screens/broadcast_screen.dart';
 import 'package:twich_clone/utils/colors.dart';
 import 'package:twich_clone/utils/utils.dart';
@@ -33,13 +34,13 @@ class _GoLiveScreenState extends State<GoLiveScreen> {
 
   void goLiveStream() async {
     String channelId = await FirestoreMhetods()
-        .starLiveStream(context, _titleController.text, image);
+        .starLiveStream(context, _titleController.text, image, type: "audio");
 
     if (channelId.isNotEmpty) {
       showSnackBar(context, "Livestream has started succesfully");
       Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => BroadCastScreen(
+          builder: (context) => BroadcastAudio(
             isBroadCaster: true,
             channelId: channelId,
           ),
@@ -59,105 +60,110 @@ class _GoLiveScreenState extends State<GoLiveScreen> {
     return SafeArea(
         child: Responsive(
       child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 18.0,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
-                  GestureDetector(
-                    onTap: selectImage,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 22.0,
-                        vertical: 22.0,
-                      ),
-                      child: image != null
-                          ? SizedBox(
-                              height: 300,
-                              child: Image.memory(image!),
-                            )
-                          : DottedBorder(
-                              strokeCap: StrokeCap.round,
-                              color: buttonColor,
-                              dashPattern: const [
-                                10,
-                                10,
-                              ],
-                              radius: const Radius.circular(
-                                10,
-                              ),
-                              borderType: BorderType.RRect,
-                              child: Container(
-                                width: double.infinity,
-                                height: 150,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Icon(
-                                      Icons.folder_open,
-                                      color: buttonColor,
-                                      size: 40,
-                                    ),
-                                    const SizedBox(
-                                      height: 15,
-                                    ),
-                                    Text(
-                                      "Selected your thumbnail",
-                                      style: TextStyle(
-                                        color: Colors.grey.shade400,
-                                        fontSize: 15,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                    10,
-                                  ),
-                                  color: buttonColor.withOpacity(0.05),
-                                ),
-                              ),
-                            ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Title",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Padding(
+        child: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).requestFocus(FocusNode());
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 18.0,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    GestureDetector(
+                      onTap: selectImage,
+                      child: Padding(
                         padding: const EdgeInsets.symmetric(
-                          vertical: 8,
+                          horizontal: 22.0,
+                          vertical: 22.0,
                         ),
-                        child: CustomTextField(
-                          controller: _titleController,
-                        ),
+                        child: image != null
+                            ? SizedBox(
+                                height: 300,
+                                child: Image.memory(image!),
+                              )
+                            : DottedBorder(
+                                strokeCap: StrokeCap.round,
+                                color: buttonColor,
+                                dashPattern: const [
+                                  10,
+                                  10,
+                                ],
+                                radius: const Radius.circular(
+                                  10,
+                                ),
+                                borderType: BorderType.RRect,
+                                child: Container(
+                                  width: double.infinity,
+                                  height: 150,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Icon(
+                                        Icons.folder_open,
+                                        color: buttonColor,
+                                        size: 40,
+                                      ),
+                                      const SizedBox(
+                                        height: 15,
+                                      ),
+                                      Text(
+                                        "Selected your thumbnail",
+                                        style: TextStyle(
+                                          color: Colors.grey.shade400,
+                                          fontSize: 15,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(
+                                      10,
+                                    ),
+                                    color: buttonColor.withOpacity(0.05),
+                                  ),
+                                ),
+                              ),
                       ),
-                    ],
-                  )
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  bottom: 10,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "Title",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 8,
+                          ),
+                          child: CustomTextField(
+                            controller: _titleController,
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
                 ),
-                child: CustomButton(
-                  text: "Go live!",
-                  ontTap: goLiveStream,
-                ),
-              )
-            ],
+                Padding(
+                  padding: const EdgeInsets.only(
+                    bottom: 10,
+                  ),
+                  child: CustomButton(
+                    text: "Go live!",
+                    ontTap: goLiveStream,
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

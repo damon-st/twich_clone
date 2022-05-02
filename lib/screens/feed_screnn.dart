@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:twich_clone/models/livestream.dart';
 import 'package:twich_clone/resources/firestore_methods.dart';
 import 'package:twich_clone/responsive/responsive_layout.dart';
+import 'package:twich_clone/screens/broadcast_audio.dart';
 import 'package:twich_clone/screens/broadcast_screen.dart';
 import 'package:twich_clone/widgets/loading_indicator.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -15,12 +16,19 @@ class FeedScreen extends StatefulWidget {
 }
 
 class _FeedScreenState extends State<FeedScreen> {
-  void joinStream(LiveStream post) async {
+  void joinStream(LiveStream post, String data) async {
     await FirestoreMhetods().updateViewCount(post.channelId, true);
     await Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) =>
-            BroadCastScreen(isBroadCaster: false, channelId: post.channelId),
+        builder: (context) {
+          if (data == "audio") {
+            return BroadcastAudio(
+                isBroadCaster: false, channelId: post.channelId);
+          } else {
+            return BroadCastScreen(
+                isBroadCaster: false, channelId: post.channelId);
+          }
+        },
       ),
     );
   }
@@ -66,7 +74,8 @@ class _FeedScreenState extends State<FeedScreen> {
                                 snapshot.data.docs[index].data());
                             return InkWell(
                               onTap: () {
-                                joinStream(post);
+                                joinStream(post,
+                                    snapshot.data.docs[index].data()["type"]);
                               },
                               child: Container(
                                 margin:
@@ -126,7 +135,8 @@ class _FeedScreenState extends State<FeedScreen> {
                               snapshot.data.docs[index].data());
                           return InkWell(
                             onTap: () {
-                              joinStream(post);
+                              joinStream(post,
+                                  snapshot.data.docs[index].data()["type"]);
                             },
                             child: Container(
                               height: size.height * 0.1,

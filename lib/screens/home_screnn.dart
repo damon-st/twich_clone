@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:twich_clone/screens/feed_screnn.dart';
 import 'package:twich_clone/screens/go_live_screen.dart';
+import 'package:twich_clone/screens/join_channel_audio.dart';
 import 'package:twich_clone/utils/colors.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,9 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> pages = [
     const FeedScreen(),
     const GoLiveScreen(),
-    const Center(
-      child: Text("Browser"),
-    )
+    const JoinChannelAudio()
   ];
 
   void onPageChange(int page) {

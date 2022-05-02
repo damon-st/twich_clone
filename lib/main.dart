@@ -11,9 +11,11 @@ import 'package:twich_clone/screens/onboarding_screnn.dart';
 import 'package:twich_clone/utils/colors.dart';
 import 'package:twich_clone/models/user.dart' as model;
 import 'package:twich_clone/widgets/loading_indicator.dart';
+import 'package:wakelock/wakelock.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Wakelock.enable();
   if (kIsWeb) {
     await Firebase.initializeApp(
       options: const FirebaseOptions(
