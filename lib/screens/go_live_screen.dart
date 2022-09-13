@@ -2,6 +2,7 @@ import 'dart:typed_data';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:twich_clone/resources/firestore_methods.dart';
 import 'package:twich_clone/responsive/responsive.dart';
 import 'package:twich_clone/screens/broadcast_audio.dart';
@@ -24,6 +25,7 @@ class _GoLiveScreenState extends State<GoLiveScreen> {
   Uint8List? image;
 
   void selectImage() async {
+    await Permission.storage.request();
     Uint8List? pickedImage = await pickImage();
     if (pickedImage != null) {
       setState(() {
